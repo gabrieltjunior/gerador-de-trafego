@@ -40,8 +40,10 @@ void Sender::send(Datagram* datagram) {
         (const struct sockaddr *) &(this->toAddress),
         sizeof(struct sockaddr_in)
     );
-	if (n < 0)
-		printf("ERROR sendto");
+	if (n < 0){
+		cout << "ERROR sending data" << endl;
+        exit(1);
+    }
 }
 
 Sender::~Sender() {
