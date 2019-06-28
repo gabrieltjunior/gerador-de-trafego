@@ -1,0 +1,8 @@
+# Ignore the build and bin dirs
+build/*
+objects/*
+
+# Ignore Mac specific files
+.DS_Store
+
+!.gitignore
