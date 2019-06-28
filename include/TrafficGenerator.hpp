@@ -18,5 +18,5 @@ class TrafficGenerator
         unsigned int mtu;
         Datagram* datagram;
         float packetsPerSecond;
-        std::chrono::milliseconds intervalBetweenPackets;
+        std::chrono::microseconds intervalBetweenPackets;
 };

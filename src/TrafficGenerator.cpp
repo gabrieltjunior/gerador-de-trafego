@@ -23,19 +23,19 @@ TrafficGenerator::~TrafficGenerator() {
 
 void TrafficGenerator::run(unsigned int executionTime) {
     float packetsPerSecond = (rate*1000)/(mtu*8);
-    milliseconds intervalBetweenPackets = milliseconds((int) (1000/packetsPerSecond));
+    microseconds intervalBetweenPackets = microseconds((int) (1000000/packetsPerSecond));
 
     cout << "Programa enviará " << packetsPerSecond << " pacote(s) de " << this->mtu << " bytes por segundo." << endl;
-    cout << "Isto é, um pacote a cada " << intervalBetweenPackets.count() << " milisegundo(s)." << endl;
+    cout << "Isto é, um pacote a cada " << intervalBetweenPackets.count() << " microsegundo(s)." << endl;
     cout << "Programa parará em " << executionTime << " segundos." << endl;
     cout << "Gerando tráfego..." << endl;
 
-    milliseconds currentTime = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
-    milliseconds maxTime = currentTime + milliseconds(executionTime*1000);
-    milliseconds targetTime = currentTime + intervalBetweenPackets;
+    microseconds currentTime = duration_cast<microseconds>(system_clock::now().time_since_epoch());
+    microseconds maxTime = currentTime + microseconds(executionTime*10000000);
+    microseconds targetTime = currentTime + intervalBetweenPackets;
 
     while(currentTime < maxTime) {
-        currentTime = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
+        currentTime = duration_cast<microseconds>(system_clock::now().time_since_epoch());
         if(currentTime >= targetTime) {
             targetTime += intervalBetweenPackets;
             this->sender->send(this->datagram);
