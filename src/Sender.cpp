@@ -20,7 +20,7 @@ Sender::Sender(std::string ip, unsigned int port) {
 
     struct hostent *host = gethostbyname(ip.c_str());
 
-    if ((this->socketFileDescriptor = ::socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
+    if ((this->socketDescriptor = ::socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
 		cout << "ERROR opening socket" << endl;
         exit(1);
     }
@@ -33,7 +33,7 @@ Sender::Sender(std::string ip, unsigned int port) {
 
 void Sender::send(Datagram* datagram) {
     int n = sendto(
-        this->socketFileDescriptor,
+        this->socketDescriptor,
         datagram->getCString(),
         datagram->getLength(),
         0,
@@ -47,5 +47,5 @@ void Sender::send(Datagram* datagram) {
 }
 
 Sender::~Sender() {
-    close(this->socketFileDescriptor);
+    close(this->socketDescriptor);
 }

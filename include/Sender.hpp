@@ -20,7 +20,7 @@ class Sender
         ~Sender();
 
     private:
-        int socketFileDescriptor;
+        int socketDescriptor;
         struct sockaddr_in toAddress;
         std::string ip;
         unsigned int port;
